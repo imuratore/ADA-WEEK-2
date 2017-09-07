@@ -26,3 +26,54 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## homework
+
+# challenge 1
+
+library(stringr)
+
+split_quote <- str_split("Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.", " ")
+
+split_quote
+
+split_no_punct <- str_split(gsub("[[:punct:]]","","Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed."), " ")
+
+split_no_punct
+
+# challenge 2
+
+m <- matrix(data = 1:80, nrow = 8, ncol = 10, byrow = FALSE)
+m
+x <- m[ ,c(2,3,6)]
+x
+x <- m[c(6,8), ]
+x
+x <- m[c(2:6),c(2:9)]
+x
+
+# challenge 3
+
+a <- array(data = 200:1, dim = c(5, 5, 4, 4))
+a
+
+y <- a[1, 1, 1, 2]
+
+# returns [1] 100
+y
+
+z <- a[2, 3, 2, ]
+
+#returns [1] 164  64 164  64
+z
+
+q <- a[1:5, 1:5, 3, 3]
+
+#returns      [,1] [,2] [,3] [,4] [,5]
+#[1,]  150  145  140  135  130
+#[2,]  149  144  139  134  129
+#[3,]  148  143  138  133  128
+#[4,]  147  142  137  132  127
+#[5,]  146  141  136  131  126
+q
+
