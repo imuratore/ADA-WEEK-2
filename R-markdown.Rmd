@@ -111,3 +111,5 @@ challenge_df
 
 challenge_df[ ,3] <- as.factor(challenge_df[ ,3])
 challenge_df
+
+str(challenge_df)
