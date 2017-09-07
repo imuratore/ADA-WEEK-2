@@ -77,3 +77,24 @@ q <- a[1:5, 1:5, 3, 3]
 #[5,]  146  141  136  131  126
 q
 
+# challenge 4
+
+Platyrrhini <- list("Cebidae","Atelidae","Pitheciidae")
+
+Catarrhini <- list("Cercopithecidae","Hylobatidae","Hominidae")
+
+Anthropoidea <- list(Platyrrhini,Catarrhini)
+
+Tarsioidea <- list("Tarsiidae")
+
+Lorisoidea <- list("Lorisidae","Galagidae")
+
+Lemuroidea <- list("Cheirogaleidae","Lepilemuridae","Indriidae","Lemuridae","Daubentoniidae")
+
+Haplorhini <- list(Anthropoidea,Tarsioidea)
+
+Strepsirhini <- list(Lorisoidea,Lemuroidea)
+
+Primates <- list(Haplorhini,Strepsirhini)
+
+Primates
