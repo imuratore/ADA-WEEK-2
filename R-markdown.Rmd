@@ -27,9 +27,9 @@ plot(pressure)
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
-## homework
+# homework
 
-# challenge 1
+## challenge 1
 
 library(stringr)
 
@@ -41,7 +41,7 @@ split_no_punct <- str_split(gsub("[[:punct:]]","","Stately, plump Buck Mulligan 
 
 split_no_punct
 
-# challenge 2
+## challenge 2
 
 m <- matrix(data = 1:80, nrow = 8, ncol = 10, byrow = FALSE)
 m
@@ -52,32 +52,36 @@ x
 x <- m[c(2:6),c(2:9)]
 x
 
-# challenge 3
+## challenge 3
 
 a <- array(data = 200:1, dim = c(5, 5, 4, 4))
+
 a
 
 y <- a[1, 1, 1, 2]
 
-# returns [1] 100
+### returns [1] 100
+
 y
 
 z <- a[2, 3, 2, ]
 
-#returns [1] 164  64 164  64
+### returns [1] 164  64 164  64
+
 z
 
 q <- a[1:5, 1:5, 3, 3]
 
-#returns      [,1] [,2] [,3] [,4] [,5]
+### returns      [,1] [,2] [,3] [,4] [,5]
 #[1,]  150  145  140  135  130
 #[2,]  149  144  139  134  129
 #[3,]  148  143  138  133  128
 #[4,]  147  142  137  132  127
 #[5,]  146  141  136  131  126
+
 q
 
-# challenge 4
+## challenge 4
 
 Platyrrhini <- list("Cebidae","Atelidae","Pitheciidae")
 
@@ -99,17 +103,20 @@ Primates <- list(Haplorhini,Strepsirhini)
 
 Primates
 
-# challenge 5
+## challenge 5
 
 challenge_m <- matrix(data = c(3, 0, 1 ,23, 1, 2, 33, 1, 1, 42, 0, 1, 41, 0, 2), nrow = 5, ncol = 3, byrow = TRUE)
 
 challenge_df <- data.frame(challenge_m)
+
 challenge_df
 
 challenge_df[ ,2] <- as.logical(challenge_df[ ,2])
+
 challenge_df
 
 challenge_df[ ,3] <- as.factor(challenge_df[ ,3])
+
 challenge_df
 
 str(challenge_df)
