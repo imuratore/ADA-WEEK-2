@@ -31,48 +31,62 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 
 ## challenge 1
 
+#### loading string manipulation package
 library(stringr)
 
+#### breaking sentence into substrings using a blank space as a separator
 split_quote <- str_split("Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.", " ")
 
 split_quote
 
+#### breaking sentence into substrings using a blank space as a separator and removing punctuation using gsub
 split_no_punct <- str_split(gsub("[[:punct:]]","","Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed."), " ")
 
 split_no_punct
 
 ## challenge 2
 
+#### creating matrix of sequence from 1-80 with 8 rows and 10 columns, populating matrix by columns
 m <- matrix(data = 1:80, nrow = 8, ncol = 10, byrow = FALSE)
+
 m
+
+#### storing columns 2, 3, and 6 of the matrix
 x <- m[ ,c(2,3,6)]
+
 x
+
+#### storing rows 6 and 8 of the matrix
 x <- m[c(6,8), ]
+
 x
+
+#### storing rows 2 through 6 and columns 2 through 9 of the matrix
 x <- m[c(2:6),c(2:9)]
+
 x
 
 ## challenge 3
 
-a <- array(data = 200:1, dim = c(5, 5, 4, 4))
+a <- array(data = 400:1, dim = c(5, 5, 4, 4))
 
 a
 
 y <- a[1, 1, 1, 2]
 
-### returns [1] 100
+### returns [1] 300
 
 y
 
 z <- a[2, 3, 2, ]
 
-### returns [1] 164  64 164  64
+### returns [1] 364 264 164  64
 
 z
 
 q <- a[1:5, 1:5, 3, 3]
 
-### returns      [,1] [,2] [,3] [,4] [,5]
+### returns           [,1] [,2] [,3] [,4] [,5]
 ### [1,]  150  145  140  135  130
 ### [2,]  149  144  139  134  129
 ### [3,]  148  143  138  133  128
@@ -83,6 +97,7 @@ q
 
 ## challenge 4
 
+#### building a set of nested lists to represent a phylogeny, clades at the lowest level that are not themselves lists are strings
 Platyrrhini <- list("Cebidae","Atelidae","Pitheciidae")
 
 Catarrhini <- list("Cercopithecidae","Hylobatidae","Hominidae")
@@ -105,18 +120,23 @@ Primates
 
 ## challenge 5
 
+#### building a matrix with 5 rows and 3 columns populated by row
 challenge_m <- matrix(data = c(3, 0, 1 ,23, 1, 2, 33, 1, 1, 42, 0, 1, 41, 0, 2), nrow = 5, ncol = 3, byrow = TRUE)
 
+#### converting above matrix to a data frame
 challenge_df <- data.frame(challenge_m)
 
 challenge_df
 
+#### converting 0 and 1 values in column 2 to boolean logic terms
 challenge_df[ ,2] <- as.logical(challenge_df[ ,2])
 
 challenge_df
 
+#### converting numerical values in column 3 to factors
 challenge_df[ ,3] <- as.factor(challenge_df[ ,3])
 
 challenge_df
 
+#### showing classes of items in the dataframe
 str(challenge_df)
