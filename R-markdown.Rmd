@@ -44,6 +44,12 @@ split_no_punct <- str_split(gsub("[[:punct:]]","","Stately, plump Buck Mulligan 
 
 split_no_punct
 
+#### storing every third element of the above after unlisting
+
+thirds <- unlist(split_no_punct)
+
+thirds[seq(1, length(thirds), 3)]
+
 ## challenge 2
 
 #### creating matrix of sequence from 1-80 with 8 rows and 10 columns, populating matrix by columns
