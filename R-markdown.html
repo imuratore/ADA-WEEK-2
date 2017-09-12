@@ -124,6 +124,391 @@ $(document).ready(function () {
 <h2>R Markdown</h2>
 <p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
 <p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
+<pre class="r"><code># homework
+
+## challenge 1
+
+#### loading string manipulation package
+library(stringr)
+
+#### breaking sentence into substrings using a blank space as a separator
+split_quote &lt;- str_split(&quot;Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.&quot;, &quot; &quot;)
+
+split_quote</code></pre>
+<pre><code>## [[1]]
+##  [1] &quot;Stately,&quot;   &quot;plump&quot;      &quot;Buck&quot;       &quot;Mulligan&quot;   &quot;came&quot;      
+##  [6] &quot;from&quot;       &quot;the&quot;        &quot;stairhead,&quot; &quot;bearing&quot;    &quot;a&quot;         
+## [11] &quot;bowl&quot;       &quot;of&quot;         &quot;lather&quot;     &quot;on&quot;         &quot;which&quot;     
+## [16] &quot;a&quot;          &quot;mirror&quot;     &quot;and&quot;        &quot;a&quot;          &quot;razor&quot;     
+## [21] &quot;lay&quot;        &quot;crossed.&quot;</code></pre>
+<pre class="r"><code>#### breaking sentence into substrings using a blank space as a separator and removing punctuation using gsub
+split_no_punct &lt;- str_split(gsub(&quot;[[:punct:]]&quot;,&quot;&quot;,&quot;Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.&quot;), &quot; &quot;)
+
+split_no_punct</code></pre>
+<pre><code>## [[1]]
+##  [1] &quot;Stately&quot;   &quot;plump&quot;     &quot;Buck&quot;      &quot;Mulligan&quot;  &quot;came&quot;     
+##  [6] &quot;from&quot;      &quot;the&quot;       &quot;stairhead&quot; &quot;bearing&quot;   &quot;a&quot;        
+## [11] &quot;bowl&quot;      &quot;of&quot;        &quot;lather&quot;    &quot;on&quot;        &quot;which&quot;    
+## [16] &quot;a&quot;         &quot;mirror&quot;    &quot;and&quot;       &quot;a&quot;         &quot;razor&quot;    
+## [21] &quot;lay&quot;       &quot;crossed&quot;</code></pre>
+<pre class="r"><code>#### storing every third element of the above after unlisting punctuation-free vector
+
+thirds &lt;- unlist(split_no_punct)
+
+thirds[seq(1, length(thirds), 3)]</code></pre>
+<pre><code>## [1] &quot;Stately&quot;  &quot;Mulligan&quot; &quot;the&quot;      &quot;a&quot;        &quot;lather&quot;   &quot;a&quot;       
+## [7] &quot;a&quot;        &quot;crossed&quot;</code></pre>
+<pre class="r"><code>## challenge 2
+
+#### creating matrix of sequence from 1-80 with 8 rows and 10 columns, populating matrix by columns
+m &lt;- matrix(data = 1:80, nrow = 8, ncol = 10, byrow = FALSE)
+
+m</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+## [1,]    1    9   17   25   33   41   49   57   65    73
+## [2,]    2   10   18   26   34   42   50   58   66    74
+## [3,]    3   11   19   27   35   43   51   59   67    75
+## [4,]    4   12   20   28   36   44   52   60   68    76
+## [5,]    5   13   21   29   37   45   53   61   69    77
+## [6,]    6   14   22   30   38   46   54   62   70    78
+## [7,]    7   15   23   31   39   47   55   63   71    79
+## [8,]    8   16   24   32   40   48   56   64   72    80</code></pre>
+<pre class="r"><code>#### storing columns 2, 3, and 6 of the matrix
+x &lt;- m[ ,c(2,3,6)]
+
+x</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    9   17   41
+## [2,]   10   18   42
+## [3,]   11   19   43
+## [4,]   12   20   44
+## [5,]   13   21   45
+## [6,]   14   22   46
+## [7,]   15   23   47
+## [8,]   16   24   48</code></pre>
+<pre class="r"><code>#### storing rows 6 and 8 of the matrix
+x &lt;- m[c(6,8), ]
+
+x</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+## [1,]    6   14   22   30   38   46   54   62   70    78
+## [2,]    8   16   24   32   40   48   56   64   72    80</code></pre>
+<pre class="r"><code>#### storing rows 2 through 6 and columns 2 through 9 of the matrix
+x &lt;- m[c(2:6),c(2:9)]
+
+x</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+## [1,]   10   18   26   34   42   50   58   66
+## [2,]   11   19   27   35   43   51   59   67
+## [3,]   12   20   28   36   44   52   60   68
+## [4,]   13   21   29   37   45   53   61   69
+## [5,]   14   22   30   38   46   54   62   70</code></pre>
+<pre class="r"><code>## challenge 3
+
+#### creating array containing the sequence from 400 to 1 with 5, 5, 4, and 4 as the 1st, 2nd etc. dimensions
+a &lt;- array(data = 400:1, dim = c(5, 5, 4, 4))
+
+a</code></pre>
+<pre><code>## , , 1, 1
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  400  395  390  385  380
+## [2,]  399  394  389  384  379
+## [3,]  398  393  388  383  378
+## [4,]  397  392  387  382  377
+## [5,]  396  391  386  381  376
+## 
+## , , 2, 1
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  375  370  365  360  355
+## [2,]  374  369  364  359  354
+## [3,]  373  368  363  358  353
+## [4,]  372  367  362  357  352
+## [5,]  371  366  361  356  351
+## 
+## , , 3, 1
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  350  345  340  335  330
+## [2,]  349  344  339  334  329
+## [3,]  348  343  338  333  328
+## [4,]  347  342  337  332  327
+## [5,]  346  341  336  331  326
+## 
+## , , 4, 1
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  325  320  315  310  305
+## [2,]  324  319  314  309  304
+## [3,]  323  318  313  308  303
+## [4,]  322  317  312  307  302
+## [5,]  321  316  311  306  301
+## 
+## , , 1, 2
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  300  295  290  285  280
+## [2,]  299  294  289  284  279
+## [3,]  298  293  288  283  278
+## [4,]  297  292  287  282  277
+## [5,]  296  291  286  281  276
+## 
+## , , 2, 2
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  275  270  265  260  255
+## [2,]  274  269  264  259  254
+## [3,]  273  268  263  258  253
+## [4,]  272  267  262  257  252
+## [5,]  271  266  261  256  251
+## 
+## , , 3, 2
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  250  245  240  235  230
+## [2,]  249  244  239  234  229
+## [3,]  248  243  238  233  228
+## [4,]  247  242  237  232  227
+## [5,]  246  241  236  231  226
+## 
+## , , 4, 2
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  225  220  215  210  205
+## [2,]  224  219  214  209  204
+## [3,]  223  218  213  208  203
+## [4,]  222  217  212  207  202
+## [5,]  221  216  211  206  201
+## 
+## , , 1, 3
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  200  195  190  185  180
+## [2,]  199  194  189  184  179
+## [3,]  198  193  188  183  178
+## [4,]  197  192  187  182  177
+## [5,]  196  191  186  181  176
+## 
+## , , 2, 3
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  175  170  165  160  155
+## [2,]  174  169  164  159  154
+## [3,]  173  168  163  158  153
+## [4,]  172  167  162  157  152
+## [5,]  171  166  161  156  151
+## 
+## , , 3, 3
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  150  145  140  135  130
+## [2,]  149  144  139  134  129
+## [3,]  148  143  138  133  128
+## [4,]  147  142  137  132  127
+## [5,]  146  141  136  131  126
+## 
+## , , 4, 3
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  125  120  115  110  105
+## [2,]  124  119  114  109  104
+## [3,]  123  118  113  108  103
+## [4,]  122  117  112  107  102
+## [5,]  121  116  111  106  101
+## 
+## , , 1, 4
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  100   95   90   85   80
+## [2,]   99   94   89   84   79
+## [3,]   98   93   88   83   78
+## [4,]   97   92   87   82   77
+## [5,]   96   91   86   81   76
+## 
+## , , 2, 4
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]   75   70   65   60   55
+## [2,]   74   69   64   59   54
+## [3,]   73   68   63   58   53
+## [4,]   72   67   62   57   52
+## [5,]   71   66   61   56   51
+## 
+## , , 3, 4
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]   50   45   40   35   30
+## [2,]   49   44   39   34   29
+## [3,]   48   43   38   33   28
+## [4,]   47   42   37   32   27
+## [5,]   46   41   36   31   26
+## 
+## , , 4, 4
+## 
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]   25   20   15   10    5
+## [2,]   24   19   14    9    4
+## [3,]   23   18   13    8    3
+## [4,]   22   17   12    7    2
+## [5,]   21   16   11    6    1</code></pre>
+<pre class="r"><code>#### storing the number at position 1, 1, 1, 2 in a
+y &lt;- a[1, 1, 1, 2]
+
+### returns [1] 300
+
+y</code></pre>
+<pre><code>## [1] 300</code></pre>
+<pre class="r"><code>#### storing the set of numbers that fit the combined criteria of being in row 2, column 3, and &quot;stack&quot; 2, regardless of the 4th dimension in a. I visualize this as a rubik's cube in which all the numbers change each minute, so we are storing all the numbers that, over time, have occupied the spot 2, 3, 2
+z &lt;- a[2, 3, 2, ]
+
+### returns [1] 364 264 164  64
+
+z</code></pre>
+<pre><code>## [1] 364 264 164  64</code></pre>
+<pre class="r"><code>#### storing the intersection of rows 1-5, columns 1-5, stack 3, and &quot;time&quot; 3 in a
+q &lt;- a[1:5, 1:5, 3, 3]
+
+### returns           [,1] [,2] [,3] [,4] [,5]
+### [1,]  150  145  140  135  130
+### [2,]  149  144  139  134  129
+### [3,]  148  143  138  133  128
+### [4,]  147  142  137  132  127
+### [5,]  146  141  136  131  126
+
+q</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  150  145  140  135  130
+## [2,]  149  144  139  134  129
+## [3,]  148  143  138  133  128
+## [4,]  147  142  137  132  127
+## [5,]  146  141  136  131  126</code></pre>
+<pre class="r"><code>## challenge 4
+
+#### building a set of nested lists to represent a phylogeny, clades at the lowest level that are not themselves lists are strings, then naming elements of higher level lists
+Platyrrhini &lt;- list(&quot;Cebidae&quot;,&quot;Atelidae&quot;,&quot;Pitheciidae&quot;)
+
+Catarrhini &lt;- list(&quot;Cercopithecidae&quot;,&quot;Hylobatidae&quot;,&quot;Hominidae&quot;)
+
+Anthropoidea &lt;- list(Platyrrhini,Catarrhini)
+
+names(Anthropoidea) &lt;- c(&quot;Platyrrhini&quot;,&quot;Catarrhini&quot;)
+
+Tarsioidea &lt;- list(&quot;Tarsiidae&quot;)
+
+Lorisoidea &lt;- list(&quot;Lorisidae&quot;,&quot;Galagidae&quot;)
+
+Lemuroidea &lt;- list(&quot;Cheirogaleidae&quot;,&quot;Lepilemuridae&quot;,&quot;Indriidae&quot;,&quot;Lemuridae&quot;,&quot;Daubentoniidae&quot;)
+
+Haplorhini &lt;- list(Anthropoidea,Tarsioidea)
+
+names(Haplorhini) &lt;- c(&quot;Anthropoidea&quot;,&quot;Tarsioidea&quot;)
+
+Strepsirhini &lt;- list(Lorisoidea,Lemuroidea)
+
+names(Strepsirhini) &lt;- c(&quot;Lorisoidea,Lemuroidea&quot;)
+
+Primates &lt;- list(Haplorhini,Strepsirhini)
+
+names(Primates) &lt;- c(&quot;Haplorhini&quot;,&quot;Strepsirhini&quot;)
+
+Primates</code></pre>
+<pre><code>## $Haplorhini
+## $Haplorhini$Anthropoidea
+## $Haplorhini$Anthropoidea$Platyrrhini
+## $Haplorhini$Anthropoidea$Platyrrhini[[1]]
+## [1] &quot;Cebidae&quot;
+## 
+## $Haplorhini$Anthropoidea$Platyrrhini[[2]]
+## [1] &quot;Atelidae&quot;
+## 
+## $Haplorhini$Anthropoidea$Platyrrhini[[3]]
+## [1] &quot;Pitheciidae&quot;
+## 
+## 
+## $Haplorhini$Anthropoidea$Catarrhini
+## $Haplorhini$Anthropoidea$Catarrhini[[1]]
+## [1] &quot;Cercopithecidae&quot;
+## 
+## $Haplorhini$Anthropoidea$Catarrhini[[2]]
+## [1] &quot;Hylobatidae&quot;
+## 
+## $Haplorhini$Anthropoidea$Catarrhini[[3]]
+## [1] &quot;Hominidae&quot;
+## 
+## 
+## 
+## $Haplorhini$Tarsioidea
+## $Haplorhini$Tarsioidea[[1]]
+## [1] &quot;Tarsiidae&quot;
+## 
+## 
+## 
+## $Strepsirhini
+## $Strepsirhini$`Lorisoidea,Lemuroidea`
+## $Strepsirhini$`Lorisoidea,Lemuroidea`[[1]]
+## [1] &quot;Lorisidae&quot;
+## 
+## $Strepsirhini$`Lorisoidea,Lemuroidea`[[2]]
+## [1] &quot;Galagidae&quot;
+## 
+## 
+## $Strepsirhini$&lt;NA&gt;
+## $Strepsirhini$&lt;NA&gt;[[1]]
+## [1] &quot;Cheirogaleidae&quot;
+## 
+## $Strepsirhini$&lt;NA&gt;[[2]]
+## [1] &quot;Lepilemuridae&quot;
+## 
+## $Strepsirhini$&lt;NA&gt;[[3]]
+## [1] &quot;Indriidae&quot;
+## 
+## $Strepsirhini$&lt;NA&gt;[[4]]
+## [1] &quot;Lemuridae&quot;
+## 
+## $Strepsirhini$&lt;NA&gt;[[5]]
+## [1] &quot;Daubentoniidae&quot;</code></pre>
+<pre class="r"><code>## challenge 5
+
+#### building a matrix with 5 rows and 3 columns populated by row
+challenge_m &lt;- matrix(data = c(3, 0, 1 ,23, 1, 2, 33, 1, 1, 42, 0, 1, 41, 0, 2), nrow = 5, ncol = 3, byrow = TRUE)
+
+#### converting above matrix to a data frame
+challenge_df &lt;- data.frame(challenge_m)
+
+challenge_df</code></pre>
+<pre><code>##   X1 X2 X3
+## 1  3  0  1
+## 2 23  1  2
+## 3 33  1  1
+## 4 42  0  1
+## 5 41  0  2</code></pre>
+<pre class="r"><code>#### converting 0 and 1 values in column 2 to boolean logic terms
+challenge_df[ ,2] &lt;- as.logical(challenge_df[ ,2])
+
+challenge_df</code></pre>
+<pre><code>##   X1    X2 X3
+## 1  3 FALSE  1
+## 2 23  TRUE  2
+## 3 33  TRUE  1
+## 4 42 FALSE  1
+## 5 41 FALSE  2</code></pre>
+<pre class="r"><code>#### converting numerical values in column 3 to factors
+challenge_df[ ,3] &lt;- as.factor(challenge_df[ ,3])
+
+challenge_df</code></pre>
+<pre><code>##   X1    X2 X3
+## 1  3 FALSE  1
+## 2 23  TRUE  2
+## 3 33  TRUE  1
+## 4 42 FALSE  1
+## 5 41 FALSE  2</code></pre>
+<pre class="r"><code>#### showing classes of items in the dataframe
+str(challenge_df)</code></pre>
+<pre><code>## 'data.frame':    5 obs. of  3 variables:
+##  $ X1: num  3 23 33 42 41
+##  $ X2: logi  FALSE TRUE TRUE FALSE FALSE
+##  $ X3: Factor w/ 2 levels &quot;1&quot;,&quot;2&quot;: 1 2 1 1 2</code></pre>
 <pre class="r"><code>summary(cars)</code></pre>
 <pre><code>##      speed           dist       
 ##  Min.   : 4.0   Min.   :  2.00  
@@ -132,144 +517,6 @@ $(document).ready(function () {
 ##  Mean   :15.4   Mean   : 42.98  
 ##  3rd Qu.:19.0   3rd Qu.: 56.00  
 ##  Max.   :25.0   Max.   :120.00</code></pre>
-</div>
-<div id="including-plots" class="section level2">
-<h2>Including Plots</h2>
-<p>You can also embed plots, for example:</p>
-<p><img src="data:image/png;base64,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" width="672" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
-</div>
-<div id="homework" class="section level1">
-<h1>homework</h1>
-<div id="challenge-1" class="section level2">
-<h2>challenge 1</h2>
-<div id="loading-string-manipulation-package" class="section level4">
-<h4>loading string manipulation package</h4>
-<p>library(stringr)</p>
-</div>
-<div id="breaking-sentence-into-substrings-using-a-blank-space-as-a-separator" class="section level4">
-<h4>breaking sentence into substrings using a blank space as a separator</h4>
-<p>split_quote &lt;- str_split(“Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.”, &quot; “)</p>
-<p>split_quote</p>
-</div>
-<div id="breaking-sentence-into-substrings-using-a-blank-space-as-a-separator-and-removing-punctuation-using-gsub" class="section level4">
-<h4>breaking sentence into substrings using a blank space as a separator and removing punctuation using gsub</h4>
-<p>split_no_punct &lt;- str_split(gsub(“[[:punct:]]”,“”,“Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.”), &quot; “)</p>
-<p>split_no_punct</p>
-</div>
-</div>
-<div id="challenge-2" class="section level2">
-<h2>challenge 2</h2>
-<div id="creating-matrix-of-sequence-from-1-80-with-8-rows-and-10-columns-populating-matrix-by-columns" class="section level4">
-<h4>creating matrix of sequence from 1-80 with 8 rows and 10 columns, populating matrix by columns</h4>
-<p>m &lt;- matrix(data = 1:80, nrow = 8, ncol = 10, byrow = FALSE)</p>
-<p>m</p>
-</div>
-<div id="storing-columns-2-3-and-6-of-the-matrix" class="section level4">
-<h4>storing columns 2, 3, and 6 of the matrix</h4>
-<p>x &lt;- m[ ,c(2,3,6)]</p>
-<p>x</p>
-</div>
-<div id="storing-rows-6-and-8-of-the-matrix" class="section level4">
-<h4>storing rows 6 and 8 of the matrix</h4>
-<p>x &lt;- m[c(6,8), ]</p>
-<p>x</p>
-</div>
-<div id="storing-rows-2-through-6-and-columns-2-through-9-of-the-matrix" class="section level4">
-<h4>storing rows 2 through 6 and columns 2 through 9 of the matrix</h4>
-<p>x &lt;- m[c(2:6),c(2:9)]</p>
-<p>x</p>
-</div>
-</div>
-<div id="challenge-3" class="section level2">
-<h2>challenge 3</h2>
-<div id="creating-array-containing-the-sequence-from-400-to-1-with-5-5-4-and-4-as-the-1st-2nd-etc.-dimensions" class="section level4">
-<h4>creating array containing the sequence from 400 to 1 with 5, 5, 4, and 4 as the 1st, 2nd etc. dimensions</h4>
-<p>a &lt;- array(data = 400:1, dim = c(5, 5, 4, 4))</p>
-<p>a</p>
-</div>
-<div id="storing-the-number-at-position-1-1-1-2-in-a" class="section level4">
-<h4>storing the number at position 1, 1, 1, 2 in a</h4>
-<p>y &lt;- a[1, 1, 1, 2]</p>
-</div>
-<div id="returns-1-300" class="section level3">
-<h3>returns [1] 300</h3>
-<p>y</p>
-<div id="storing-the-set-of-numbers-that-fit-the-combined-criteria-of-being-in-row-2-column-3-and-stack-2-regardless-of-the-4th-dimension-in-a.-i-visualize-this-as-a-rubiks-cube-in-which-all-the-numbers-change-each-minute-so-we-are-storing-all-the-numbers-that-over-time-have-occupied-the-spot-2-3-2" class="section level4">
-<h4>storing the set of numbers that fit the combined criteria of being in row 2, column 3, and “stack” 2, regardless of the 4th dimension in a. I visualize this as a rubik’s cube in which all the numbers change each minute, so we are storing all the numbers that, over time, have occupied the spot 2, 3, 2</h4>
-<p>z &lt;- a[2, 3, 2, ]</p>
-</div>
-</div>
-<div id="returns-1-364-264-164-64" class="section level3">
-<h3>returns [1] 364 264 164 64</h3>
-<p>z</p>
-<div id="storing-the-intersection-of-rows-1-5-columns-1-5-stack-3-and-time-4-in-a" class="section level4">
-<h4>storing the intersection of rows 1-5, columns 1-5, stack 3, and “time” 4 in a</h4>
-<p>q &lt;- a[1:5, 1:5, 3, 3]</p>
-</div>
-</div>
-<div id="returns-1-2-3-4-5" class="section level3">
-<h3>returns [,1] [,2] [,3] [,4] [,5]</h3>
-</div>
-<div id="section" class="section level3">
-<h3>[1,] 150 145 140 135 130</h3>
-</div>
-<div id="section-1" class="section level3">
-<h3>[2,] 149 144 139 134 129</h3>
-</div>
-<div id="section-2" class="section level3">
-<h3>[3,] 148 143 138 133 128</h3>
-</div>
-<div id="section-3" class="section level3">
-<h3>[4,] 147 142 137 132 127</h3>
-</div>
-<div id="section-4" class="section level3">
-<h3>[5,] 146 141 136 131 126</h3>
-<p>q</p>
-</div>
-</div>
-<div id="challenge-4" class="section level2">
-<h2>challenge 4</h2>
-<div id="building-a-set-of-nested-lists-to-represent-a-phylogeny-clades-at-the-lowest-level-that-are-not-themselves-lists-are-strings" class="section level4">
-<h4>building a set of nested lists to represent a phylogeny, clades at the lowest level that are not themselves lists are strings</h4>
-<p>Platyrrhini &lt;- list(“Cebidae”,“Atelidae”,“Pitheciidae”)</p>
-<p>Catarrhini &lt;- list(“Cercopithecidae”,“Hylobatidae”,“Hominidae”)</p>
-<p>Anthropoidea &lt;- list(Platyrrhini,Catarrhini)</p>
-<p>Tarsioidea &lt;- list(“Tarsiidae”)</p>
-<p>Lorisoidea &lt;- list(“Lorisidae”,“Galagidae”)</p>
-<p>Lemuroidea &lt;- list(“Cheirogaleidae”,“Lepilemuridae”,“Indriidae”,“Lemuridae”,“Daubentoniidae”)</p>
-<p>Haplorhini &lt;- list(Anthropoidea,Tarsioidea)</p>
-<p>Strepsirhini &lt;- list(Lorisoidea,Lemuroidea)</p>
-<p>Primates &lt;- list(Haplorhini,Strepsirhini)</p>
-<p>Primates</p>
-</div>
-</div>
-<div id="challenge-5" class="section level2">
-<h2>challenge 5</h2>
-<div id="building-a-matrix-with-5-rows-and-3-columns-populated-by-row" class="section level4">
-<h4>building a matrix with 5 rows and 3 columns populated by row</h4>
-<p>challenge_m &lt;- matrix(data = c(3, 0, 1 ,23, 1, 2, 33, 1, 1, 42, 0, 1, 41, 0, 2), nrow = 5, ncol = 3, byrow = TRUE)</p>
-</div>
-<div id="converting-above-matrix-to-a-data-frame" class="section level4">
-<h4>converting above matrix to a data frame</h4>
-<p>challenge_df &lt;- data.frame(challenge_m)</p>
-<p>challenge_df</p>
-</div>
-<div id="converting-0-and-1-values-in-column-2-to-boolean-logic-terms" class="section level4">
-<h4>converting 0 and 1 values in column 2 to boolean logic terms</h4>
-<p>challenge_df[ ,2] &lt;- as.logical(challenge_df[ ,2])</p>
-<p>challenge_df</p>
-</div>
-<div id="converting-numerical-values-in-column-3-to-factors" class="section level4">
-<h4>converting numerical values in column 3 to factors</h4>
-<p>challenge_df[ ,3] &lt;- as.factor(challenge_df[ ,3])</p>
-<p>challenge_df</p>
-</div>
-<div id="showing-classes-of-items-in-the-dataframe" class="section level4">
-<h4>showing classes of items in the dataframe</h4>
-<p>str(challenge_df)</p>
-</div>
-</div>
 </div>
 
 
