@@ -44,7 +44,7 @@ split_no_punct <- str_split(gsub("[[:punct:]]","","Stately, plump Buck Mulligan 
 
 split_no_punct
 
-#### storing every third element of the above after unlisting
+#### storing every third element of the above after unlisting punctuation-free vector
 
 thirds <- unlist(split_no_punct)
 
@@ -107,12 +107,14 @@ q
 
 ## challenge 4
 
-#### building a set of nested lists to represent a phylogeny, clades at the lowest level that are not themselves lists are strings
+#### building a set of nested lists to represent a phylogeny, clades at the lowest level that are not themselves lists are strings, then naming elements of higher level lists
 Platyrrhini <- list("Cebidae","Atelidae","Pitheciidae")
 
 Catarrhini <- list("Cercopithecidae","Hylobatidae","Hominidae")
 
 Anthropoidea <- list(Platyrrhini,Catarrhini)
+
+names(Anthropoidea) <- c("Platyrrhini","Catarrhini")
 
 Tarsioidea <- list("Tarsiidae")
 
@@ -122,9 +124,15 @@ Lemuroidea <- list("Cheirogaleidae","Lepilemuridae","Indriidae","Lemuridae","Dau
 
 Haplorhini <- list(Anthropoidea,Tarsioidea)
 
+names(Haplorhini) <- c("Anthropoidea","Tarsioidea")
+
 Strepsirhini <- list(Lorisoidea,Lemuroidea)
 
+names(Strepsirhini) <- c("Lorisoidea,Lemuroidea")
+
 Primates <- list(Haplorhini,Strepsirhini)
+
+names(Primates) <- c("Haplorhini","Strepsirhini")
 
 Primates
 
