@@ -87,7 +87,7 @@ z <- a[2, 3, 2, ]
 
 z
 
-#### storing the intersection of rows 1-5, columns 1-5, stack 3, and "time" 4 in a
+#### storing the intersection of rows 1-5, columns 1-5, stack 3, and "time" 3 in a
 q <- a[1:5, 1:5, 3, 3]
 
 ### returns           [,1] [,2] [,3] [,4] [,5]
